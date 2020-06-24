@@ -22,9 +22,6 @@ stylesheet:
   - name: iubenda
     uri: /assets/css/privacy_policy.css
 javascript:
-  - name: jquery
-    uri: 'https://code.jquery.com/jquery-3.5.1.slim.min.js'
-    sri: sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj
   - name: clipboardjs
     uri: /assets/js/vendor/clipboard.min.js
   - name: main

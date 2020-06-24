@@ -9,10 +9,9 @@ block content
     p.lead.text-center.mb-4
         a(href='/about/#sustainability') What’s this?
 
-    .row
+    .row.row-cols-1.row-cols-md-2.g-4
         each theme in config.extras.themesAd
-            .col-12.col-md-6
-                include _partials/theme.pug
+            include _partials/theme.pug
 
     .row
         .col-12

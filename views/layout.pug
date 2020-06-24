@@ -21,7 +21,7 @@ html(lang='en', prefix='og: http://ogp.me/ns#', itemscope, itemtype='http://sche
         include _partials/head/social.pug
 
         -var bootswatch = helpers.theme.get(theme);
-        link(rel='stylesheet', href=bootswatch.uri, integrity=bootswatch.sri, crossorigin='anonymous')
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css', crossorigin='anonymous')
 
         block stylesheets
 
@@ -35,9 +35,9 @@ html(lang='en', prefix='og: http://ogp.me/ns#', itemscope, itemtype='http://sche
 
         include _partials/jumbotron.pug
 
-        .container
+        .container.mt-3
             .row.justify-content-center
-                .col-12.col-md-10
+                .col-12.col-md-10.col-xxl-8
                     block content
 
         include _partials/footer.pug

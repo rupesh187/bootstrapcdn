@@ -1,7 +1,7 @@
 -
-    var bootswatchVersion = semver.coerce(config.files.bootswatch4.version);
-    var bootstrap = config.files.bootstrap.find(file => semver.satisfies(file.version, `~${bootswatchVersion}`));
-    var jquery = config.app.javascript.find(file => file.name === 'jquery');
+    //var bootswatchVersion = semver.coerce(config.files.bootswatch4.version);
+    var bootstrap = config.files.bootstrap.find(file => semver.satisfies(file.version, `^5`, { includePrerelease: true }));
+    var bootstrapJsBundleSri = bootstrap.javascriptBundleSri;
     var clipboardjs = config.app.javascript.find(file => file.name === 'clipboardjs');
     var clipboardjsUri = getVersionedPath(clipboardjs.uri);
     var clipboardjsSri = helpers.getSri(clipboardjs.uri);
@@ -9,21 +9,23 @@
     var mainJsUri = getVersionedPath(mainJs.uri);
     var mainJsSri = helpers.getSri(mainJs.uri);
 
+| var bootstrapUri = '#{bootstrap.javascriptBundle}';
 | var mainJsUri = '#{mainJsUri}';
 | var clipboardjsUri = '#{clipboardjsUri}';
-| var jqueryUri = '#{jquery.uri}';
-| var bootstrapUri = '#{bootstrap.javascriptBundle}';
 |
-| loadjs([clipboardjsUri, mainJsUri], 'main', {
+| loadjs([bootstrapUri, clipboardjsUri, mainJsUri], 'main', {
 |    before: function(path, el) {
-|        el.integrity = path === mainJsUri ? '#{mainJsSri}' : '#{clipboardjsSri}';
-|        el.crossOrigin = 'anonymous';
-|     },
-|     async: false
-| });
-| loadjs([jqueryUri, bootstrapUri], 'jquery', {
-|    before: function(path, el) {
-|        el.integrity = path === jqueryUri ? '#{jquery.sri}' : '#{bootstrap.javascriptBundleSri}';
+|        switch (path) {
+|        case bootstrapUri:
+|            el.integrity = '#{bootstrapJsBundleSri}';
+|            break;
+|        case clipboardjsUri:
+|            el.integrity = '#{clipboardjsSri}';
+|            break;
+|        case mainJsUri:
+|            el.integrity = '#{mainJsSri}';
+|            break;
+|        }
 |        el.crossOrigin = 'anonymous';
 |     },
 |     async: false

@@ -1,6 +1,7 @@
 mixin menuItem(name, url, nofollow)
     -
         const classes = ['nav-item'];
+        const linkClasses = ['nav-link'];
         const attr = attributes || {};
 
         if (typeof attr.extraclass !== 'undefined') {
@@ -8,7 +9,7 @@ mixin menuItem(name, url, nofollow)
         }
 
         if (pageUrl.split('?')[0] === url) {
-            classes.push('active');
+            linkClasses.push('active');
         }
 
         if (name.includes(' Legacy')) {
@@ -20,4 +21,4 @@ mixin menuItem(name, url, nofollow)
         }
 
     li(class=classes)
-        a.nav-link(href=`${url}${themeQs}`, rel=attr.rel)=name
+        a(class=linkClasses, href=`${url}${themeQs}`, rel=attr.rel)=name
